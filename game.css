@@ -1,0 +1,17 @@
+#board {
+	height: 500px;
+	width: 500px;
+	background-color: grey;
+	margin: 0 auto;
+}
+
+.cell {
+	width: 10px;
+	height: 10px;
+	background-color: black;
+	border: 1px solid;
+}
+
+.cell.alive {
+	background-color: white;
+}

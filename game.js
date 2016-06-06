@@ -4,26 +4,27 @@ function GameOfLife(width, height, customCoordinateHash) {
 	this.width = width;
 	this.height = height;
 	this.customCoordinateHash = customCoordinateHash || null;
+	this.numberOfGenerations = 0;
 
 	this.randomCoordinateHash = function() {
 		var obj = {};
-		for (var row = 0; row < 50; row++) {
-			for (var column = 0; column < 50; column++) {
+		for (var row = 0; row < this.height; row++) {
+			for (var column = 0; column < this.width; column++) {
 				if (Math.round(Math.random())) {
 					obj[row + '-' + column] = 'alive';
 				}
 			}
 		}
 		return obj;
-	}();
-	this.coordinateHash = this.customCoordinateHash || this.randomCoordinateHash;
+	};
+	this.coordinateHash = this.customCoordinateHash || this.randomCoordinateHash();
 
 	this.createAndShowBoard = function() {
 		// create the board
 		var tableHtml = '<table>';
-		for (var row = 0; row < this.width; row++) {
+		for (var row = 0; row < this.height; row++) {
 			tableHtml += '<tr>';
-			for (var col = 0; col < this.height; col++) {
+			for (var col = 0; col < this.width; col++) {
 				tableHtml += '<td id="' + row + '-' + col + '" class="cell"></td>';
 			}
 			tableHtml += '</tr>';
@@ -95,6 +96,13 @@ function GameOfLife(width, height, customCoordinateHash) {
 		});
 
 		this.coordinateHash = newCoordinateHash;
+
+		this.updateNumberOfGenerations()
+	};
+	this.updateNumberOfGenerations = function() {
+		this.numberOfGenerations++;
+		var generationsElement = document.getElementById('generations');
+		generationsElement.innerHTML = this.numberOfGenerations;
 	};
 }
 

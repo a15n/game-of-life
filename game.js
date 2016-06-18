@@ -6,6 +6,17 @@ function GameOfLife(width, height, customCoordinateHash) {
 	this.customCoordinateHash = customCoordinateHash || null;
 	this.numberOfGenerations = 0;
 
+	var tableHtml = '<table>';
+	for (var row = 0; row < this.height; row++) {
+		tableHtml += '<tr>';
+		for (var col = 0; col < this.width; col++) {
+			tableHtml += '<td id="' + row + '-' + col + '" class="cell"></td>';
+		}
+		tableHtml += '</tr>';
+	}
+	tableHtml += '</table>';
+	this.blankBoard = tableHtml;
+
 	this.randomCoordinateHash = function() {
 		var obj = {};
 		for (var row = 0; row < this.height; row++) {
@@ -19,20 +30,8 @@ function GameOfLife(width, height, customCoordinateHash) {
 	};
 	this.coordinateHash = this.customCoordinateHash || this.randomCoordinateHash();
 
-	this.createAndShowBoard = function() {
-		// create the board
-		var tableHtml = '<table>';
-		for (var row = 0; row < this.height; row++) {
-			tableHtml += '<tr>';
-			for (var col = 0; col < this.width; col++) {
-				tableHtml += '<td id="' + row + '-' + col + '" class="cell"></td>';
-			}
-			tableHtml += '</tr>';
-		}
-		tableHtml += '</table>';
-
-		// assign onclick events to each cell
-		document.getElementById('board').innerHTML = tableHtml;
+	this.showBoardAndAssignClickFunctions = function() {
+		document.getElementById('board').innerHTML = this.blankBoard;
 		var cells = document.getElementsByClassName('cell');
 		var _this = this;
 		var clickFunction = function() {
@@ -110,7 +109,7 @@ function GameOfLife(width, height, customCoordinateHash) {
 /* ----------------- */
 
 var gol = new GameOfLife(50, 50);
-gol.createAndShowBoard();
+gol.showBoardAndAssignClickFunctions();
 
 var executionId;
 document.getElementById('run').onclick = function() {

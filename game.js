@@ -103,6 +103,16 @@ function GameOfLife(width, height, customCoordinateHash) {
 		var generationsElement = document.getElementById('generations');
 		generationsElement.innerHTML = this.numberOfGenerations;
 	};
+	this.resetCoordinateHash = function() {
+		this.coordinateHash = {};
+	};
+	this.removeAllAliveClasses = function() {
+		// if I use jquery replace with $(".alive").removeClass("alive")
+		var cells = document.getElementsByClassName('cell');
+		Array.from(cells).forEach(function(cell) {
+			cell.className = '';
+		});
+	};
 }
 
 
@@ -120,4 +130,15 @@ document.getElementById('run').onclick = function() {
 
 document.getElementById('pause').onclick = function() {
 	clearInterval(executionId);
+};
+
+document.getElementById('reset').onclick = function() {
+	clearInterval(executionId);
+	gol.resetCoordinateHash();
+	gol.removeAllAliveClasses();
+	gol.numberOfGenerations = 0;
+
+	gol = new GameOfLife(50, 50);
+	gol.showBoardAndAssignClickFunctions();
+	console.log('reset');
 };

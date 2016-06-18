@@ -122,23 +122,27 @@ var gol = new GameOfLife(50, 50);
 gol.showBoardAndAssignClickFunctions();
 
 var executionId;
-document.getElementById('run').onclick = function() {
-	executionId = setInterval(function() {
-		gol.runSimulation();
-	}, 100);
-};
+document.getElementById('run-pause').onclick = function() {
+	if (!executionId) { // run function
+		this.innerText = 'Pause'
+		executionId = setInterval(function() {
+			gol.runSimulation();
+		}, 100);
+	} else { // pause function
+		this.innerText = 'Run';
+		clearInterval(executionId);
+		executionId = null;
+	}
 
-document.getElementById('pause').onclick = function() {
-	clearInterval(executionId);
 };
 
 document.getElementById('reset').onclick = function() {
 	clearInterval(executionId);
 	gol.resetCoordinateHash();
 	gol.removeAllAliveClasses();
-	gol.numberOfGenerations = 0;
 
 	gol = new GameOfLife(50, 50);
+	gol.numberOfGenerations = 0;
 	gol.showBoardAndAssignClickFunctions();
 	console.log('reset');
 };

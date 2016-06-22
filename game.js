@@ -3,7 +3,9 @@
 function GameOfLife(width, height) {
 	this.width = width;
 	this.height = height;
+
 	this.numberOfGenerations = 0;
+	this.isRunning = false;
 
 	var tableHtml = '<table>';
 	for (var row = 0; row < this.height; row++) {
@@ -64,7 +66,7 @@ function GameOfLife(width, height) {
 		});
 		return num;
 	};
-	this.runSimulation = function() {
+	this.evolve = function() {
 		var cells = document.getElementsByClassName('cell');
 		var newCoordinateHash = {};
 		var _this = this;
@@ -129,19 +131,24 @@ gol.showBoardAndAssignClickFunctions();
 
 var executionId;
 document.getElementById('run-pause').onclick = function() {
-	if (!executionId) { // run function
-		this.innerText = 'Pause'
-		executionId = setInterval(function() {
-			gol.runSimulation();
-		}, 100);
-	} else { // pause function
-		this.innerText = 'Run';
+	if (gol.isRunning) {
+		// User clicked "Pause"
+		gol.isRunning = false;
 		clearInterval(executionId);
-		executionId = null;
+		this.innerText = 'Run';
+	} else {
+		// User clicked "Run"
+		gol.isRunning = true;
+		executionId = setInterval(function() {
+			gol.evolve();
+		}, 100);
+		this.innerText = 'Pause'
 	}
 };
 
 document.getElementById('reset').onclick = function() {
+	// User clicked "Reset"
+	gol.isRunning = false;
 	clearInterval(executionId);
 	gol.revertToInitialState();
 };

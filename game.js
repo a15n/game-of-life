@@ -1,9 +1,8 @@
 "use strict";
 
-function GameOfLife(width, height, customCoordinateHash) {
+function GameOfLife(width, height) {
 	this.width = width;
 	this.height = height;
-	this.customCoordinateHash = customCoordinateHash || null;
 	this.numberOfGenerations = 0;
 
 	var tableHtml = '<table>';
@@ -28,7 +27,7 @@ function GameOfLife(width, height, customCoordinateHash) {
 		}
 		return obj;
 	};
-	this.coordinateHash = this.customCoordinateHash || this.randomCoordinateHash();
+	this.coordinateHash = this.randomCoordinateHash();
 
 	this.showBoardAndAssignClickFunctions = function() {
 		document.getElementById('board').innerHTML = this.blankBoard;
@@ -96,22 +95,29 @@ function GameOfLife(width, height, customCoordinateHash) {
 
 		this.coordinateHash = newCoordinateHash;
 
-		this.updateNumberOfGenerations()
+		this.updateNumberOfGenerations(this.numberOfGenerations + 1);
 	};
-	this.updateNumberOfGenerations = function() {
-		this.numberOfGenerations++;
-		var generationsElement = document.getElementById('generations');
-		generationsElement.innerHTML = this.numberOfGenerations;
+	this.updateNumberOfGenerations = function(num) {
+		this.numberOfGenerations = num;
+		document.getElementById('generations').innerHTML = num;
 	};
 	this.resetCoordinateHash = function() {
 		this.coordinateHash = {};
 	};
 	this.removeAllAliveClasses = function() {
 		// if I use jquery replace with $(".alive").removeClass("alive")
-		var cells = document.getElementsByClassName('cell');
+		var cells = document.getElementsByClassName('alive');
 		Array.from(cells).forEach(function(cell) {
-			cell.className = '';
+			cell.className = 'cell';
 		});
+	};
+
+	this.revertToInitialState = function() {
+		// this is called on init() and on #reset.click
+		this.updateNumberOfGenerations(0);
+		document.getElementById('run-pause').innerText = 'Run';
+		this.removeAllAliveClasses(); // resets the visuals
+		this.coordinateHash = this.randomCoordinateHash();
 	};
 }
 
@@ -133,16 +139,9 @@ document.getElementById('run-pause').onclick = function() {
 		clearInterval(executionId);
 		executionId = null;
 	}
-
 };
 
 document.getElementById('reset').onclick = function() {
 	clearInterval(executionId);
-	gol.resetCoordinateHash();
-	gol.removeAllAliveClasses();
-
-	gol = new GameOfLife(50, 50);
-	gol.numberOfGenerations = 0;
-	gol.showBoardAndAssignClickFunctions();
-	console.log('reset');
+	gol.revertToInitialState();
 };

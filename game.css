@@ -11,9 +11,6 @@
 .cell.alive {
 	background-color: white;
 }
-.cell:not(.alive) {
-	background-color: black;
-}
 
 td {
 	border: 1px solid #222;

@@ -22,20 +22,17 @@
 	</style>
 </head>
 <body>
-	<div class="column small-4 text-center">
+	<div class="column small-4">
 		<p>
-			The universe of the Game of Life is an infinite 2D orthogonal grid of square cells, each of which is in one of two possible states, alive or dead.
+			The universe of the Game of Life is an infinite 2D orthogonal grid of cells, each of which is either alive or dead.
 		</p>
 		<p>
-			Every cell interacts with its eight neighbors which are the cells that are horizontally, vertically, or diagonally adjacent.
-		</p>
-		<p>
-			At each step in time (generation), the following transitions occur:
+			During an evolution each cell interacts with its eight neighbors and one of the following transitions may occur:
 			<ul>
-				<li>Any live cell with fewer than two live neighbors dies, as if caused by under population</li>
-				<li>Any live cell with two or three live neighbors lives on to the next generation</li>
-				<li>Any live cell with more than three neighbors dies as if by overcrowding</li>
-				<li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction</li>
+				<li>Under Population: A live cell with &lt;2 live neighbors dies</li>
+				<li>Equilibrium: A live cell with 2 - 3 live neighbors survives</li>
+				<li>Overcrowding: A live cell with &gt;three neighbors dies</li>
+				<li>Reproduction: A dead cell with 3 live neighbors becomes a live cell</li>
 			</ul>
 		</p>
 		<button id="run-pause" class="button">Run</button>

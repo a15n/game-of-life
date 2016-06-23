@@ -1,4 +1,4 @@
-https://www.youtube.com/watch?v=C2vgICfQawE
+Inspired by https://www.youtube.com/watch?v=C2vgICfQawE
 
 foundation components used
 * button

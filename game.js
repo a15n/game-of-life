@@ -16,6 +16,8 @@ function GameOfLife(width, height) {
 	};
 
 	var table = document.createElement('table');
+	table.setAttribute('style', 'min-width: ' + this.width * 10 + 'px;')
+	debugger;
 	for (var row = 0; row < this.height; row++) {
 		var tr = document.createElement('tr');
 		for (var col = 0; col < this.width; col++) {

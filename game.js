@@ -49,14 +49,14 @@ function GameOfLife(width, height) {
 			} else if (isAlive && numberOfLiveNeighbors <= 3) {
 				// Any live cell with two or three live neighbors lives on to the next generation
 				cell.setAttribute('data-status', 'alive');
-				newCoordinateHash[cell.id] = 'alive'; //update the newCoordinateHash
+				newCoordinateHash[cell.id] = 'alive';
 			} else if (isAlive && numberOfLiveNeighbors > 3) {
 				// Any live cell with more than three neighbors dies as if by overcrowding
 				cell.setAttribute('data-status', null);
 			} else if (isDead && numberOfLiveNeighbors == 3) {
 				// Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction
 				cell.setAttribute('data-status', 'alive');
-				newCoordinateHash[cell.id] = 'alive'; //update the newCoordinateHash
+				newCoordinateHash[cell.id] = 'alive';
 			}
 		});
 

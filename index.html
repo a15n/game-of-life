@@ -24,12 +24,19 @@
 <body>
 	<div class="column small-3 text-center">
 		<p>
-			The game of life Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			The universe of the Game of Life is an infinite 2D orthogonal grid of square cells, each of which is in one of two possible states, alive or dead.
+		</p>
+		<p>
+			Every cell interacts with its eight neighbors which are the cells that are horizontally, vertically, or diagonally adjacent.
+		</p>
+		<p>
+			At each step in time (generation), the following transitions occur:
+			<ul>
+				<li>Any live cell with fewer than two live neighbors dies, as if caused by under population</li>
+				<li>Any live cell with two or three live neighbors lives on to the next generation</li>
+				<li>Any live cell with more than three neighbors dies as if by overcrowding</li>
+				<li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction</li>
+			</ul>
 		</p>
 		<button id="run-pause" class="button">Run</button>
 		<button id="reset" class="button">Reset</button>

@@ -9,9 +9,10 @@ function GameOfLife(width, height) {
 	// and an onclick function to toggle each <td>'s alive state
 	var golScope = this;
 	var clickFunction = function() {
-		// in this context, 'this' is bound to the HTML element
-		golScope.coordinateHash[this.id] = 'alive';
-		this.classList.toggle('alive');
+		var currentStatus = this.getAttribute('data-status');
+		var futureStatus = currentStatus == 'alive' ? null : 'alive';
+		golScope.coordinateHash[this.id] = futureStatus;
+		this.setAttribute('data-status', futureStatus);
 	};
 
 	var table = document.createElement('table');

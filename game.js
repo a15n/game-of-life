@@ -124,8 +124,7 @@ function GameOfLife(width, height) {
 
 
 /* ----------------- */
-
-var gol = new GameOfLife(50, 50);
+var gol = new GameOfLife(75, 75);
 
 var executionId;
 document.getElementById('run-pause').onclick = function() {
@@ -141,6 +140,12 @@ document.getElementById('run-pause').onclick = function() {
 			gol.evolve();
 		}, 100);
 		this.innerText = 'Pause'
+	}
+};
+
+document.getElementById('evolve').onclick = function() {
+	if (!gol.isRunning) {
+		gol.evolve();
 	}
 };
 
